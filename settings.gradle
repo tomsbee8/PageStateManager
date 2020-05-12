@@ -1,0 +1,3 @@
+rootProject.name='PageStateManager'
+include ':pagestatemanager'
+include ':example'
