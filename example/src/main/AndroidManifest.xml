@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SampleActivity">
+        <activity android:name=".SampleActivity"
+            android:label="@string/activity_sample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SampleFragmentActivity" />
+        <activity android:name=".SampleFragmentActivity"
+            android:label="@string/fragment_sample"/>
     </application>
 
 </manifest>

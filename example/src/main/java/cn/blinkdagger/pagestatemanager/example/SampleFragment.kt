@@ -22,19 +22,17 @@ class SampleFragment : Fragment() {
         initViews()
     }
 
-    fun initViews() {
+    private fun initViews() {
         pageStateManager = PageStateMachine.with(this@SampleFragment)
-            .setContentViewId(R.id.ll_content)
             .setLoadingLayout(R.layout.layout_content_loading)
+            .setShowLoadingWhenCreate(false)
+            .addCustomStateLayout(1, R.layout.layout_load_failed)
             .get()
         tv_loading.setOnClickListener {
             pageStateManager?.showLoading()
         }
-        tv_load_empty.setOnClickListener {
-            pageStateManager?.showLoadEmpty()
-        }
-        tv_load_failed.setOnClickListener {
-            pageStateManager?.showLoadFailed()
+        tv_custom_state_1.setOnClickListener {
+            pageStateManager?.showCustomStateView(1)
         }
         tv_load_content.setOnClickListener {
             pageStateManager?.showContent()

@@ -18,10 +18,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
 
         <ImageView
             android:layout_width="100dp"
@@ -33,7 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Bye    World!" />
+            android:text="不苟求，求必有义；不虚行，行必有正" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="不妄动，动必有道；不徒语，语必有理" />
 
     </LinearLayout>
 

@@ -63,7 +63,7 @@ public class PageStateManagerBuilder {
         return this;
     }
 
-    public PageStateManagerBuilder setStateListener(ShowStateListener mStateListener) {
+    public PageStateManagerBuilder setShowStateListener(ShowStateListener mStateListener) {
         this.mStateListener = mStateListener;
         return this;
     }

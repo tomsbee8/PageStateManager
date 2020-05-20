@@ -212,6 +212,10 @@ import java.util.Map;
         showStateView(STATE_LOAD_EMPTY);
     }
 
+    public void showCustomStateView(int stateCode){
+        showStateView(String.valueOf(stateCode));
+    }
+
     public void showNothing() {
         mContainerView.removeAllViews();
         mContainerView.setVisibility(View.GONE);
