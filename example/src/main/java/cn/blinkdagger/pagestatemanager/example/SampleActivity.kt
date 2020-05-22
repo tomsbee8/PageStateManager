@@ -9,9 +9,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import cn.blinkdagger.pagestatemanager.PageStateMachine
-import cn.blinkdagger.pagestatemanager.PageStateManager
-import cn.blinkdagger.pagestatemanager.ShowStateListener
+import cn.blinkdagger.pagestatemanage.PageStateMachine
+import cn.blinkdagger.pagestatemanage.PageStateManager
+import cn.blinkdagger.pagestatemanage.ShowStateListener
 import kotlinx.android.synthetic.main.activity_sample.*
 
 class SampleActivity : AppCompatActivity(),ShowStateListener{

@@ -1,4 +1,4 @@
-package cn.blinkdagger.pagestatemanager;
+package cn.blinkdagger.pagestatemanage;
 
 import android.app.Activity;
 import android.content.Context;

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import cn.blinkdagger.pagestatemanager.PageStateMachine
-import cn.blinkdagger.pagestatemanager.PageStateManager
+import cn.blinkdagger.pagestatemanage.PageStateMachine
+import cn.blinkdagger.pagestatemanage.PageStateManager
 import kotlinx.android.synthetic.main.fragment_sample.*
 
 class SampleFragment : Fragment() {
