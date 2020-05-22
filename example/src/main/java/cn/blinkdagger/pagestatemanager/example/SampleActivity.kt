@@ -41,6 +41,7 @@ class SampleActivity : AppCompatActivity(),ShowStateListener{
     private fun initView(){
         pageStateManager = PageStateMachine.with(this@SampleActivity)
             .setContentViewId(R.id.ll_content)
+            .setShowLoadingWhenCreate(true)
             .setLoadingLayout(R.layout.layout_content_loading)
             .setFailedLayout(R.layout.layout_load_failed)
             .setEmptyLayout(R.layout.layout_load_empty)

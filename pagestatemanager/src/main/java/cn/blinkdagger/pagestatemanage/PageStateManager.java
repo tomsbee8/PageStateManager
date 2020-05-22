@@ -12,6 +12,9 @@ import android.widget.FrameLayout;
 import androidx.annotation.IdRes;
 import androidx.annotation.IntRange;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 import androidx.fragment.app.Fragment;
 
 import java.util.HashMap;
@@ -114,12 +117,18 @@ import java.util.Map;
             mContainerView.addView(mTargetView, 0, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
             parentView.addView(mContainerView, originIndex, originLayoutParams);
 
+            AsyncLayoutInflater newInflater = new AsyncLayoutInflater(originInflater.getContext());
             for (Map.Entry<String, Integer> entry : stateLayoutIdMap.entrySet()) {
                 int stateLayoutId = entry.getValue();
                 if (!stateViewMap.containsKey(stateLayoutId)) {
-                    View stateView = originInflater.inflate(stateLayoutId, null);
-                    mContainerView.addView(stateView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-                    stateViewMap.put(stateLayoutId, stateView);
+                    newInflater.inflate(stateLayoutId, null, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                        @Override
+                        public void onInflateFinished(@NonNull View stateView, int resId, @Nullable ViewGroup parent) {
+                            stateView.setVisibility(View.INVISIBLE);
+                            mContainerView.addView(stateView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+                            stateViewMap.put(resId, stateView);
+                        }
+                    });
                 }
             }
             parentView.post(new Runnable() {
