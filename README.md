@@ -12,7 +12,7 @@
 ### 使导入
 加入到dependencies：
 ```
- implementation 'cn.blinkdagger:PageStateManage:1.0' 
+ implementation 'cn.blinkdagger:PageStateManage:1.1' 
 ```
 
 在Activity 或者Fragment 中使用：
@@ -23,11 +23,11 @@
  //在activity的setContentView() 之后， 或者在Fragmentde onViewCreated()之中初始化PageStateManager对象
  
  pageStateManager = PageStateMachine.with(this)
-            .setContentViewId(R.id.ll_content)           // 设置内容View的Id，如果不设置将会把内容View默认为根布局
-            .setShowLoadingWhenCreate(true)         // 设置是否在初始化的时候显示加载中 
-            .setLoadingLayout(R.layout.layout_content_loading)             //设置加载中状态布局资源ID
-            .setFailedLayout(R.layout.layout_load_failed)           //设置加载失败状态布局资源ID
-            .setEmptyLayout(R.layout.layout_load_empty)          //设置空数据状态布局资源ID
+            .setContentViewId(R.id.ll_content) // 设置内容View的Id，如果不设置将会把内容View默认为根布局
+            .setShowLoadingWhenCreate(true)// 设置是否在初始化的时候显示加载中 
+            .setLoadingLayout(R.layout.layout_content_loading) //设置加载中状态布局资源ID
+            .setFailedLayout(R.layout.layout_load_failed) //设置加载失败状态布局资源ID
+            .setEmptyLayout(R.layout.layout_load_empty)//设置空数据状态布局资源ID
             .addCustomStateLayout(stateCode, R.layout.layout_load_failed)//增加自定义状态布局
             .setShowStateListener(this)//设置显示状态的时候监听
             .get()
