@@ -26,6 +26,7 @@ class SampleFragment : Fragment() {
         pageStateManager = PageStateMachine.with(this@SampleFragment)
             .setLoadingLayout(R.layout.layout_content_loading)
             .setShowLoadingWhenCreate(false)
+            .setStateViewScrollEnable(true)
             .addCustomStateLayout(1, R.layout.layout_load_failed)
             .get()
         tv_loading.setOnClickListener {

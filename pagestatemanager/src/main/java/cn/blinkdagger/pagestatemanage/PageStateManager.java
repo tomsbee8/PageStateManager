@@ -15,6 +15,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import java.util.HashMap;
@@ -40,9 +41,10 @@ import java.util.Map;
     private HashMap<Integer, View> stateViewMap = new HashMap<>();        // 存放所有布局和视图【key值为布局Id,value为生成的View】
     private HashMap<String, Integer> stateLayoutIdMap = new HashMap<>();  // 存放所有状态的布局【key值为状态码,value为状态对应的布局Id】
     private View mTargetView = null;                     // 加载内容的视图
-    private FrameLayout mContainerView = null;           // 存放内容View和各状态View的容器
+    private ViewGroup mContainerView = null;           // 存放内容View和各状态View的容器
 
     private boolean mShowLoadingWhenCreate = false;      // 是否在初始化的时候，显示正在加载中
+    private boolean mEnableStateViewScroll = false;      // 是否允许状态布局滚动
 
     private ShowStateListener mStateListener;
 
@@ -108,14 +110,29 @@ import java.util.Map;
     }
 
     private void init(Context context, LayoutInflater originInflater) {
+
+        if(mTargetView == null){
+            new IllegalArgumentException("PageStateStateMachine will not working, because targetView cannot be found , illegal content view Id was set up").printStackTrace();
+            return;
+        }
+
         if (mTargetView.getParent() != null) {
             ViewGroup parentView = (ViewGroup) mTargetView.getParent();
             int originIndex = parentView.indexOfChild(mTargetView);
             ViewGroup.LayoutParams originLayoutParams = mTargetView.getLayoutParams();
             parentView.removeView(mTargetView);
+
             mContainerView = new FrameLayout(context);
-            mContainerView.addView(mTargetView, 0, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-            parentView.addView(mContainerView, originIndex, originLayoutParams);
+
+            if(mEnableStateViewScroll){
+                NestedScrollView  scrollParentView = new NestedScrollView(context);
+                scrollParentView.removeAllViews();
+                scrollParentView.addView(mContainerView);
+                parentView.addView(scrollParentView, originIndex, originLayoutParams);
+            }else{
+                mContainerView.addView(mTargetView, 0, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+                parentView.addView(mContainerView, originIndex, originLayoutParams);
+            }
 
             AsyncLayoutInflater newInflater = new AsyncLayoutInflater(originInflater.getContext());
             for (Map.Entry<String, Integer> entry : stateLayoutIdMap.entrySet()) {
@@ -144,6 +161,10 @@ import java.util.Map;
         } else {
             throw new IllegalStateException("target view does not have a parent view");
         }
+    }
+
+    private void setStateViewScrollEnable(Boolean scrollEnable) {
+
     }
 
 
@@ -229,7 +250,6 @@ import java.util.Map;
         mContainerView.removeAllViews();
         mContainerView.setVisibility(View.GONE);
     }
-
 
     protected void setStateLoadingLayout(@LayoutRes int loadingLayoutId) {
         stateLayoutIdMap.put(STATE_LOADING, loadingLayoutId);

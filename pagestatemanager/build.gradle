@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 
 android {
@@ -35,12 +34,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
-publish {
-    repoName = "PageStateManager"
-    userOrg = 'blinkdagger' // bintray注册的用户名或者组织名称，必须
-    groupId = 'cn.blinkdagger' //必须
-    artifactId = 'PageStateManage' //必须
-    publishVersion = '1.1' //发布的版本，必须
-    desc = 'Android page state  manager'//项目描述，非必须
-    website = 'http://www.blinkdagger.cn'//建议项目github地址，非必须
-}
+apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
+
+
+

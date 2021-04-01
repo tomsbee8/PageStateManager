@@ -26,6 +26,7 @@ public class PageStateManagerBuilder {
     private Integer mEmptyLayoutId = null;
     private Integer mContentViewId = null;
     private boolean mShowLoadingWhenCreate = false;      // 是否在初始化的时候，显示正在加载中
+    private boolean mEnableStateViewScroll = false;      // 是否允许状态布局滚动
     private ShowStateListener mStateListener;
     private HashMap<Integer, Integer> customLayoutMap = new HashMap<>();  // 存放所有状态的布局【key值为状态码,value为状态对应的布局Id】
 
@@ -60,6 +61,11 @@ public class PageStateManagerBuilder {
 
     public PageStateManagerBuilder setShowLoadingWhenCreate(boolean mShowLoadingWhenCreate) {
         this.mShowLoadingWhenCreate = mShowLoadingWhenCreate;
+        return this;
+    }
+
+    public PageStateManagerBuilder setStateViewScrollEnable(boolean mEnableStateViewScroll) {
+        this.mEnableStateViewScroll = mEnableStateViewScroll;
         return this;
     }
 
